@@ -1,0 +1,18 @@
+-- QUERIES
+
+-- 1. in friends table list the data which are matched with user profile id
+select distinct friends.friend_id, friend_name from friends JOIN user_profile on friends.friend_id = user_profile.user_id;
+
+-- 2. display all the posts of user id 5
+select * from posts where user_id_from = 5;
+
+-- 3. write a query that matching the words or character with %gmail%
+select * from user_profile where email like '%gmail%';
+
+-- 4. limit the display data from the table comments for 3 which belongs to user 4
+select * from comments where user_id_from = 4 order by created_at desc limit 3;
+
+
+-- 5. combile profile_status and user_profile and login_details display matchin records
+select u.user_id, u.email, u.username, u.first_name, u.last_name, p.active_status, max(l.login_at) from user_profile u, profile_status p, login_details l
+where u.user_id=p.user_id and p.active_status = 'yes' and l.user_id = p.user_id group by u.user_id; 
